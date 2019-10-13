@@ -1,6 +1,6 @@
 # grove-react-map-components
 
-[Demo] (demo/dist/index.html)
+[Demo](demo/dist/index.html)
 
 ## Installation
 
