@@ -1,6 +1,6 @@
 # grove-react-map-components
 
-[Demo]: https://marklogic-community.github.io/grove-react-map-components/demo/dist/
+[Demo] (demo/dist/)
 
 ## Installation
 
