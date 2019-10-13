@@ -1,0 +1,65 @@
+html,
+body,
+#demo {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+main {
+  flex: 1 1 100%;
+  display: flex;
+}
+
+.olmap {
+  flex: 1;
+}
+
+#demo-controls {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  height: 250px;
+  width: 350px;
+  border-radius: 6px;
+  border: solid 8px #eee;
+  background-color: #fff;
+}
+
+#demo-controls h1 {
+  font-size: 1.45em;
+  margin: 0.5em;
+}
+
+#demo-controls .demo-components {
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+}
+
+.demo-components label {
+  padding: 0.5em;
+}
+
+.ol-popup-layer {
+  min-width: 275px;
+  border-width: 0;
+  box-shadow: 2px 2px 4px #999;
+  border-radius: 10px;
+}
+
+.ol-popup-layer header {
+  background-color: #39c;
+  padding: 0.75rem;
+  font-size: 1.15em;
+  color: #fff;
+  border-radius: 10px 10px 0 0;
+}
+
+.ol-popup-layer .content {
+  padding: 1.5rem 0.75rem;
+  font-size: 1em;
+  border-radius: 0 0 10px 10px;
+  background-color: #fff;
+}

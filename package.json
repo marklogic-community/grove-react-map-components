@@ -1,6 +1,6 @@
 {
   "name": "grove-react-map-components",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "grove-react-map-components React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -19,7 +19,9 @@
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ol": "^6.0.1"
+  },
   "peerDependencies": {
     "react": "16.x"
   },

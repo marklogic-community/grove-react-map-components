@@ -1,9 +1,15 @@
-import React, {Component} from 'react'
+import MapContext from "./MapContext";
+import InfoWindow from "./InfoWindow";
+import FeatureLayer from "./FeatureLayer";
+import LineStringLayer from "./LineStringLayer";
+import MapProvider from "./MapProvider";
+import OpenLayersMap from "./OpenLayersMap";
 
-export default class extends Component {
-  render() {
-    return <div>
-      <h2>Welcome to React components</h2>
-    </div>
-  }
-}
+export {
+  MapContext,
+  InfoWindow,
+  FeatureLayer,
+  LineStringLayer,
+  MapProvider,
+  OpenLayersMap
+};

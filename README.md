@@ -1,16 +1,29 @@
 # grove-react-map-components
 
-[![Travis][build-badge]][build]
-[![npm package][npm-badge]][npm]
-[![Coveralls][coveralls-badge]][coveralls]
+## Installation
 
-Describe grove-react-map-components here.
+`npm install grove-react-map-components`
 
-[build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
-[build]: https://travis-ci.org/user/repo
+## MapContext
 
-[npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
-[npm]: https://www.npmjs.org/package/npm-package
+The MapContext is used to reference and manipulate the underlying OpenLayers map instance. It is a react context and, as such, is available to any component within the DOM hierarchy of the provider. Use a parent MapProvider so that all child map components will affect the same map instance. This allows multiple instances of a map to be created depending on the needs of the application. Grove-react-map-components use this context internally. Your custom components can also use them by importing MapContext and referencing it via `useContext(MapContext)` or `contextType = MapContext` in your React component.
 
-[coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
-[coveralls]: https://coveralls.io/github/user/repo
+## &lt;MapProvider&gt;
+
+The MapProvder is a required parent component that exposes the MapContext to its child components. It renders nothing directly and encapsulates an instance of a map. You can have multiple MapProviders instances.
+
+## &lt;OpenLayersMap&gt;
+
+This is a basemap component that will create a map instance using OpenLayers API. It must appear within a MapProvider parent and supports the following properties:
+
+> **projection**: *"EPSG:3857"* 
+> 
+> **center**: *[-95.79, 34.48]*
+> 
+> **zoom**: *4*
+> 
+> **cssClass**: _"olMap"_ 
+> 
+> **bingAPIKey**: _undefined. If provided, will use Bing basemap instead of OSM_ 
+> 
+> **bingImagerySet**: _used to specify the Bing imagery set if bingAPIKey is provided. Defaults to "AerialWithLabels"_
