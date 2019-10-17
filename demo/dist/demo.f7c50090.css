@@ -291,6 +291,11 @@ body,
   width: 100%;
 }
 
+html {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 125%;
+}
+
 main {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 100%;
@@ -308,18 +313,20 @@ main {
 
 #demo-controls {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  height: 250px;
-  width: 350px;
+  bottom: 2rem;
+  left: 1rem;
+  width: 20rem;
   border-radius: 6px;
   border: solid 8px #eee;
   background-color: #fff;
 }
 
 #demo-controls h1 {
-  font-size: 1.45em;
-  margin: 0.5em;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  margin: 1rem;
+  font-weight: 100;
+  color: #555;
 }
 
 #demo-controls .demo-components {
@@ -337,6 +344,28 @@ main {
 
 .demo-components label {
   padding: 0.5em;
+  font-size: 0.7rem;
+  background-color: #f9f9f9;
+  margin: 4px 0;
+  cursor: pointer;
+}
+.demo-components label span:before {
+  content: "\2610";
+  font-size: 1rem;
+  margin-right: 1em;
+  padding-left: 0.25em;
+  opacity: 0.15;
+  font-weight: bold;
+  font-size: 1.75em;
+}
+.demo-components label input:checked ~ span:before {
+  content: "\2611";
+  color: green;
+  opacity: 1;
+}
+.demo-components label input {
+  visibility: hidden;
+  position: absolute;
 }
 
 .ol-popup-layer {
@@ -350,17 +379,17 @@ main {
 .ol-popup-layer header {
   background-color: #39c;
   padding: 0.75rem;
-  font-size: 1.15em;
+  font-size: 1rem;
   color: #fff;
   border-radius: 10px 10px 0 0;
 }
 
 .ol-popup-layer .content {
   padding: 1.5rem 0.75rem;
-  font-size: 1em;
+  font-size: 0.8rem;
   border-radius: 0 0 10px 10px;
   background-color: #fff;
 }
 
 
-/*# sourceMappingURL=demo.2b891952.css.map*/
+/*# sourceMappingURL=demo.f7c50090.css.map*/
