@@ -15,6 +15,8 @@ export default function OpenLayersMap({
   projection = "EPSG:3857",
   center = [-95.79, 34.48],
   zoom = 4,
+  minZoom = 0,
+  maxZoom = 28,
   cssClass = "olmap",
   ...props
 }) {
@@ -31,6 +33,18 @@ export default function OpenLayersMap({
   // create the map when component first mounts
   useEffect(() => {
     console.log("OpenLayersMap creating new map instance");
+    const extend = [];
+    if (props.allowFullScreen) {
+      extend.push(new FullScreen());
+    }
+    if (props.showMousePosition) {
+      extend.push(
+        new MousePosition({
+          coordinateFormat: createStringXY(4),
+          projection: projection
+        })
+      );
+    }
     const map = new Map({
       target: mapContainer.current,
       layers: [
@@ -41,15 +55,11 @@ export default function OpenLayersMap({
       view: new View({
         projection: projection,
         center: fromLonLat(center), // does this need to consider projection?
-        zoom: zoom
+        zoom: zoom,
+        maxZoom: props.maxZoom,
+        minZoom: props.minZoom
       }),
-      controls: defaultControls().extend([
-        new FullScreen(),
-        new MousePosition({
-          coordinateFormat: createStringXY(4),
-          projection: projection
-        })
-      ])
+      controls: defaultControls().extend(extend)
     });
 
     context.setMap(map);

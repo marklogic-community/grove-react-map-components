@@ -129,7 +129,7 @@
     {
       "type": "Feature",
       "geometry": { "type": "Point", "coordinates": [-112.027031, 46.595805] },
-      "properties": { "state": "Montana", "name": "Helana" }
+      "properties": { "state": "Montana", "name": "Helena" }
     },
     {
       "type": "Feature",

@@ -66,7 +66,7 @@ export default function Demo(props) {
               toggleLayer(e.target.value);
             }}
           />
-          FeatureLayer
+          <span>FeatureLayer</span>
         </label>
         <label>
           <input
@@ -77,7 +77,7 @@ export default function Demo(props) {
               toggleLayer(e.target.value);
             }}
           />
-          LineStringLayer
+          <span>LineStringLayer</span>
         </label>
         <label>
           <input
@@ -88,7 +88,7 @@ export default function Demo(props) {
               toggleLayer(e.target.value);
             }}
           />
-          InfoWindow (hover)
+          <span>InfoWindow (hover)</span>
         </label>
         <label>
           <input
@@ -99,7 +99,7 @@ export default function Demo(props) {
               toggleLayer(e.target.value);
             }}
           />
-          InfoWindow (click)
+          <span>InfoWindow (click)</span>
         </label>
       </section>
     </article>
@@ -116,6 +116,7 @@ export default function Demo(props) {
             zoom-min="4"
             center-={[-118.20891562, 33.88763885]}
             mapId="demo"
+            allowFullScreen={true}
             // bingAPIKey="AlFVwO4ygqpj4tu5fW27wU5J389E6bTxikPu_FgtY7fb8O45DBiG1lxwUWTF1Dkc"
           />
           {shownComponents.includes("feature") ? (

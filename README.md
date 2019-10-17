@@ -23,9 +23,31 @@ This is a basemap component that will create a map instance using OpenLayers API
 > **center**: *[-95.79, 34.48]*
 > 
 > **zoom**: *4*
+>
+> **minZoom**: 0
+>
+> **maxZoom**: 28
 > 
 > **cssClass**: _"olMap"_ 
 > 
 > **bingAPIKey**: _undefined. If provided, will use Bing basemap instead of OSM_ 
 > 
 > **bingImagerySet**: _used to specify the Bing imagery set if bingAPIKey is provided. Defaults to "AerialWithLabels"_
+> 
+> **allowFullScreen**: _false_ If true, adds a full screen control to the map
+> 
+> **showMousePosition**: _false_ If true, displays mouse position on the map
+
+## &lt;FeatureLayer&gt;
+
+Used to add features to an existing base map.  Must appear within a MapProvider.  Can have multiple FeatureLayer components within a single map.  They will be added to the map in the order they appear in the DOM.  FeatureLayer removes its created map layer upon unmount of the component, therefore toggle the hidden property if layer order is important to your application.  It supports the following properties:
+
+> **features**: _array_ An array of features to display.  Supports a variety of formats, but must include either `.geometry` or `.location` properties, which can then contain either an array as `.coordinates` or an object with `.lat | .latitude` and `.long | .longitude`.  Optionally may include `.type` and `.featureType` for styling and selection filtering.  The entire feature object will be stored on the resulting map feature as `.data`
+> 
+> **styleMap**: _object_ an abstraction of OpenLayers style options.  The map should be keyed by feature type.  An example of a style definition is included in [demo/index.js](demo/src/index.js)
+>
+> **cluster**: _object_ an object definition if clustering is desired.  The structure of the object is passed to the [cluster source](https://openlayers.org/en/latest/apidoc/module-ol_source_Cluster.html).  Optional
+>>
+> **fit**: _false_ If true, will fit the map bounds to the extent of this layer when features are updated.  _Note: you may wish to set maxZoom on the map if using `fit` with a FeatureLayer that may potentially contain a single feature._
+> 
+> **layerName**: _string_  Used for debugging purposes.  Optional
