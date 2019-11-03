@@ -46,9 +46,8 @@ export default function InfoWindow({
       case "hover":
         return { condition: pointerMove };
       case "click":
-        return { condition: click };
       default:
-        return null;
+        return { condition: click };
     }
   }
 
@@ -71,8 +70,8 @@ export default function InfoWindow({
         return show;
       };
       select.current = new Select(config);
+      debugger;
       context.map.addInteraction(select.current);
-      console.log("InfoWindow adding hover interaction");
       select.current.on("select", showInfoWindow);
       return () => {
         select.current.un("select", showInfoWindow);
@@ -84,7 +83,6 @@ export default function InfoWindow({
   // add the rendered component
   useEffect(() => {
     if (context.map) {
-      console.log("overlayRefs.current", overlayRef.current);
       layer.current = new Overlay({
         element: overlayRef.current.querySelector(".grove-info-window"),
         autoPan: !!autoPan,
@@ -93,11 +91,11 @@ export default function InfoWindow({
         }
       });
 
-      console.log("InfoWindow adding overlay layer");
+      debugger;
       context.map.addOverlay(layer.current);
 
       return () => {
-        console.log("InfoWindow cleaning up overlay layer effect");
+        debugger;
         context.map.getOverlays().remove(layer.current);
       };
     }

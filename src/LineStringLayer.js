@@ -39,7 +39,6 @@ export default function LineStringLayer(props) {
     return latlng;
   }
   const buildFeatures = () => {
-    console.log("updating polyline features");
     const line_feature = new Feature({
       geometry: new LineString(
         props.features.map(feature => {
@@ -63,7 +62,7 @@ export default function LineStringLayer(props) {
       buildFeatures();
 
       return () => {
-        console.log("clearing polyline features");
+        debugger;
         source.current.clear();
       };
     }
@@ -71,7 +70,6 @@ export default function LineStringLayer(props) {
 
   useEffect(() => {
     if (context.map) {
-      console.log("creating polyline layer source");
       source.current = new VectorSource();
 
       layer.current = new VectorLayer({
@@ -114,6 +112,7 @@ export default function LineStringLayer(props) {
         }
       });
 
+      debugger;
       context.map.addLayer(layer.current);
 
       if (props.features) {
