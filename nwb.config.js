@@ -8,5 +8,8 @@ module.exports = {
     html: {
       template: "demo/src/index.html"
     }
+  },
+  karma: {
+    testContext: 'tests/setupTests.js'
   }
 };
