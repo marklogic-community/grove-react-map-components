@@ -47,7 +47,25 @@ Used to add features to an existing base map.  Must appear within a MapProvider.
 > **styleMap**: _object_ an abstraction of OpenLayers style options.  The map should be keyed by feature type.  An example of a style definition is included in [demo/index.js](demo/src/index.js)
 >
 > **cluster**: _object_ an object definition if clustering is desired.  The structure of the object is passed to the [cluster source](https://openlayers.org/en/latest/apidoc/module-ol_source_Cluster.html).  Optional
->>
+>
 > **fit**: _false_ If true, will fit the map bounds to the extent of this layer when features are updated.  _Note: you may wish to set maxZoom on the map if using `fit` with a FeatureLayer that may potentially contain a single feature._
 > 
 > **layerName**: _string_  Used for debugging purposes.  Optional
+
+## &lt;OpenLayersMap&gt;
+
+This component shows a geospatial map using OpenLayers API. It displays the geospatial facets set as a property of this component. It allows user to select areas of the map and emit a boundsChanged event if set.
+
+> **facets** - geospatial facets
+>
+> **geoFacetNames** - only displays the geospatial facets from the specified names
+>
+> **boundsChanged**(_drawnBounds_) - function called when the user draws points, polygons, and/or circles in the map
+>
+> **markerClick**(_uri_) - function called when the user selects a marker in the map
+>
+> **class** (default: `olmap`) - the css class of the map
+>
+> **lonLat** (default: `[-95.79, 34.48]`) - center of the map
+>
+> **zoom** (default: `4`) - zoom of the map

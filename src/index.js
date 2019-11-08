@@ -4,6 +4,7 @@ import FeatureLayer from "./FeatureLayer";
 import LineStringLayer from "./LineStringLayer";
 import MapProvider from "./MapProvider";
 import OpenLayersMap from "./OpenLayersMap";
+import OpenLayersSearchMap from "./OpenLayersSearchMap";
 
 export {
   MapContext,
@@ -11,5 +12,6 @@ export {
   FeatureLayer,
   LineStringLayer,
   MapProvider,
-  OpenLayersMap
+  OpenLayersMap,
+  OpenLayersSearchMap
 };
