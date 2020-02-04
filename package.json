@@ -1,5 +1,5 @@
 {
-  "name": "grove-react-map-components",
+  "name": "@marklogic-community/grove-react-map-components",
   "version": "0.1.0",
   "description": "grove-react-map-components React component",
   "main": "lib/index.js",
@@ -30,12 +30,12 @@
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
     "nwb": "0.23.x",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "author": "",
   "homepage": "",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": "",
   "keywords": [
     "react-component"

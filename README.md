@@ -4,7 +4,7 @@
 
 ## Installation
 
-`npm install grove-react-map-components`
+`npm install @marklogic-community/grove-react-map-components`
 
 ## MapContext
 
