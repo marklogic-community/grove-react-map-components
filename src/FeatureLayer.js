@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef } from "react";
+import React, { useEffect, useContext, useRef, useState } from "react";
 import Feature from "ol/Feature";
 import { Point } from "ol/geom";
 import { fromLonLat } from "ol/proj";
@@ -16,50 +16,52 @@ function getPointLongLat(point) {
   return latlng;
 }
 
+export function parseStyleMap(config) {
+  const styles = {};
+  Object.keys(config).forEach(key => {
+    const opts = { ...config[key] };
+    if (opts.circle) {
+      let { fill, stroke, ...circle } = opts.circle;
+      // TODO: might be able to genericize this
+      if (fill) {
+        circle.fill = new Fill(fill);
+      }
+      if (stroke) {
+        circle.stroke = new Stroke(stroke);
+      }
+      opts.image = new CircleStyle(circle);
+    }
+    if (opts.text) {
+      let { fill, ...text } = opts.text;
+      if (fill) {
+        text.fill = new Fill(fill);
+      }
+      opts.text = new Text(text);
+    }
+    styles[key] = new Style(opts);
+  });
+  return styles;
+}
+
+export function useStyleMap(config, memo) {
+  const [styleMap, setStyleMap] = useState({});
+
+  useEffect(() => {
+    setStyleMap(parseStyleMap(config));
+  }, memo || []);
+
+  return styleMap;
+}
+
 export default function FeatureLayer(props) {
   const context = useContext(MapContext);
-  const styles = useRef({});
   const layer = useRef(null);
   const source = useRef(null);
 
-  useEffect(() => {
-    const styleMap = {};
-    const config = props.styleMap;
-    Object.keys(config).forEach(key => {
-      const opts = { ...config[key] };
-      if (opts.circle) {
-        let { fill, stroke, ...circle } = opts.circle;
-        // TODO: might be able to genericize this
-        if (fill) {
-          circle.fill = new Fill(fill);
-        }
-        if (stroke) {
-          circle.stroke = new Stroke(stroke);
-        }
-        opts.image = new CircleStyle(circle);
-        console.log("new circle style", opts, config);
-      }
-      if (opts.text) {
-        let { fill, ...text } = opts.text;
-        if (fill) {
-          text.fill = new Fill(fill);
-        }
-        opts.text = new Text(text);
-      }
-      console.log("creating new style in stylemap", key, opts);
-      styleMap[key] = new Style(opts);
-    });
-
-    console.log("returning stylemap ", styleMap, config);
-    styles.current = styleMap;
-  }, [props.styleMap]);
+  const styles = useStyleMap(props.styleMap || {});
 
   useEffect(() => {
     if (context.map) {
-      console.log(
-        "creating new FeatureLayer source for layer name",
-        props.layerName
-      );
       source.current = new VectorSource();
 
       let clusterSource;
@@ -73,26 +75,10 @@ export default function FeatureLayer(props) {
 
       layer.current = new VectorLayer({
         projection: props.projection || "EPSG:4326",
-        source: clusterSource || source.current,
-        style: feature => {
-          let style;
-          if (feature.values_.features) {
-            const type = feature.values_.features[0].get("type");
-            style = styles.current[type];
-            if (style.getText()) {
-              style.getText().setText("" + feature.values_.features.length);
-            }
-          } else {
-            const myfeature = feature.values_;
-            style = styles.current[myfeature.type];
-            if (style.getText()) {
-              style.getText().setText(myfeature.data.properties.name);
-            }
-          }
-          return style;
-        }
+        source: clusterSource || source.current
       });
 
+      debugger;
       context.map.addLayer(layer.current);
 
       if (props.features) {
@@ -100,17 +86,40 @@ export default function FeatureLayer(props) {
       }
 
       return () => {
+        debugger;
         context.map.removeLayer(layer.current);
       };
     }
   }, [context.map]);
 
+  useEffect(() => {
+    if (layer.current) {
+      layer.current.setStyle(feature => {
+        let style;
+        if (feature.values_.features) {
+          const type = feature.values_.features[0].get("type");
+          style = styles[type];
+          if (style.getText()) {
+            style.getText().setText("" + feature.values_.features.length);
+          }
+        } else {
+          const myfeature = feature.values_;
+          style = styles[myfeature.type];
+          if (style.getText()) {
+            style.getText().setText(myfeature.data.properties.name);
+          }
+        }
+        return style;
+      });
+    }
+  }, [
+    layer.current,
+    Object.keys(styles)
+      .sort()
+      .join()
+  ]);
+
   function buildFeatures() {
-    console.log(
-      "building features for FeatureLayer %s with ",
-      props.layerName,
-      props.features
-    );
     source.current.addFeatures(
       props.features.map(
         point =>

@@ -32,7 +32,6 @@ export default function OpenLayersMap({
 
   // create the map when component first mounts
   useEffect(() => {
-    console.log("OpenLayersMap creating new map instance");
     const extend = [];
     if (props.allowFullScreen) {
       extend.push(new FullScreen());
@@ -45,6 +44,7 @@ export default function OpenLayersMap({
         })
       );
     }
+    debugger;
     const map = new Map({
       target: mapContainer.current,
       layers: [
